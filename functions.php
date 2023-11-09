@@ -138,16 +138,28 @@ add_action( 'widgets_init', 'tahiti_widgets_init' );
  * Enqueue scripts and styles.
  */
 function tahiti_scripts() {
-	wp_enqueue_style( 'tahiti-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'tahiti-style', 'rtl', 'replace' );
 
-	wp_enqueue_script( 'tahiti-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'tahiti-navigation-js', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+    wp_enqueue_script( 'tahiti-bootstrap-js', get_template_directory_uri() . '/js/bootstrap.min.js', array(), _S_VERSION, true );
+    wp_enqueue_script( 'tahiti-slick-js', get_template_directory_uri() . '/js/slick.min.js', array(), _S_VERSION, true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
 }
 add_action( 'wp_enqueue_scripts', 'tahiti_scripts' );
+
+
+function tahiti_styles() {
+    wp_enqueue_style( 'tahiti-style-css', get_stylesheet_uri(), array(), _S_VERSION );
+    wp_style_add_data( 'tahiti-style-css', 'rtl', 'replace' );
+    wp_enqueue_style( 'tahiti-bootstrap-css', get_template_directory_uri() . '/styles/bootstrap.min.css', array(), _S_VERSION );
+    wp_enqueue_style( 'tahiti-slick-css', get_template_directory_uri() . '/styles/slick.min.css', array(), _S_VERSION );
+    wp_enqueue_style( 'tahiti-main-css', get_template_directory_uri() . '/styles/main.css', array(), _S_VERSION );
+
+}
+
+add_action( 'wp_enqueue_scripts', 'tahiti_styles' );
 
 /**
  * Implement the Custom Header feature.
